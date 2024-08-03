@@ -1,0 +1,36 @@
+services:
+  # Node.js
+  node:
+    image: react-typescript/node:local
+    build:
+      context: ./
+      dockerfile: ./docker/node/Dockerfile
+    ports:
+      - "3000:3000"
+    tty: true
+    volumes:
+      - ./app:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    networks:
+      - react-typescript
+
+  # Webサーバー (ビルド後の動作確認用に設置する)
+  nginx:
+    image: react-typescript/nginx:local
+    build:
+      context: ./
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app/build/:/var/www/public/
+    networks:
+      - react-typescript
+
+volumes:
+  node_modules:
+    driver: local
+
+networks:
+  react-typescript:
+    driver: bridge
