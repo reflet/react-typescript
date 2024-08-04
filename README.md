@@ -88,6 +88,57 @@ $ docker compose exec node npm install {ライブラリ名}
 ```
 
 # 備考 #
+## TypeScript設定 (tsconfig) ##
+
+TypeScriptをプロジェクト事にカスタマイズする。  
+
+* TypeScript公式サイト / tsconfig リファレンス  
+  https://www.typescriptlang.org/ja/tsconfig
+
+### target ###
+`どのバージョンのJavaScriptにコンパイルするか` を指定します。  
+　※ デフォルト: es5  
+　※ ES6は、一部未対応のブラウザがあるので、デフォルトはES5となっている  
+
+### lib ###
+
+targetに指定しているバージョンに存在しない機能を使用したい場合はlibに追記します。  
+esnextという記述がありますが、ESNextとはECMAScriptの仕様（つまり最新のJavaScriptの記法）となります。  
+
+### module ###
+
+JavaScriptは、フロントエンドかバックエンドかで指定するモジュールが変わるようです。  
+※ フロントエンド: `esnext`  
+※ バックエンド: `commonjs`  
+
+### jsx ###
+
+React開発では必要な設定となります。  
+これはJSX構文がどのようにJavaScriptファイルに出力されるかを設定するものです。  
+※ Reactのバージョン16まで： react  
+※ Reactのバージョン17以降： react-jsx  
+　( バージョン17からJSXの変換ロジックが変わった )  
+
+### strict ###
+
+プログラムがなるべく安全に動くようにTypeScriptが推奨している設定をいくつかまとめて有効化する。  
+※ 新規開発の場合は、 `true` にすることが推奨される  
+
+## TypeScriptの型定義を別でインストールする ##
+
+使用するライブラリに型定義がない場合、 `Definitely Typed` のリポジトリから追加する。  
+
+* Definitely Typed  
+  https://github.com/DefinitelyTyped/DefinitelyTyped  
+
+* TypeScript公式サイト（Type Search画面）  
+  https://www.typescriptlang.org/dt/search
+
+```bash
+# 例)
+$ docker-compose exec node npm install -D @types/react-router-dom
+```
+
 ## ライブラリのコピー ##
 
 IDEなどの兼ね合いで、npmコマンドでインストールしたライブラリをローカルにコピーしたい場合は下記のようにする。
