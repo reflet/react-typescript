@@ -13,7 +13,8 @@ React.js (18.x系) を学習するために作成したリポジトリです。
 * MacOS ( bashが使えるWindows環境)
   ( [Gitbash](https://gitforwindows.org) / [Windows Subsystem for Linux 2](https://docs.microsoft.com/ja-jp/windows/wsl/install-win10) )
 * [Gitコマンド](https://git-scm.com) をインストール済み
-* [Docker for Desktop](https://hub.docker.com/editions/community/docker-ce-desktop-mac) をインストール済み
+* [Docker for Desktop](https://hub.docker.com/editions/community/docker-ce-desktop-mac) をインストール済み  
+  ※ docker compose ver2.x系
 
 ## 準備 ##
 
@@ -30,7 +31,7 @@ $ cd react-typescript
 dockerイメージを作成します。
 
 ```bash
-$ docker-compose build
+$ docker compose build
 ```
 
 ## サーバー起動 ##
@@ -38,7 +39,7 @@ $ docker-compose build
 dockerコンテナを起動します。
 
 ```bash
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 ## 動作確認 (Watch) ##
@@ -46,7 +47,7 @@ $ docker-compose up -d
 開発用にReactを起動します。
 
 ```bash
-$ docker-compose exec node npm start
+$ docker compose exec node npm start
 ```
 
 ブラウザでページを開いてみる。
@@ -61,7 +62,7 @@ Reactをビルドします。
 ※ `./app/build/` フォルダ配下にビルドされたファイルが作成されます
 
 ```bash
-$ docker-compose exec node npm run build
+$ docker compose exec node npm run build
 ```
 
 ブラウザでページを開いてみる。
@@ -75,7 +76,7 @@ $ open http://localhost:8080
 サーバーを破棄する場合は、下記コマンドを実行します。
 
 ```bash
-$ docker-compose down -v
+$ docker compose down -v
 ```
 
 ## Nodeライブラリ ##
@@ -83,7 +84,7 @@ $ docker-compose down -v
 新規にライブラリを追加する。
 
 ```bash
-$ docker-compose exec node npm install {ライブラリ名}
+$ docker compose exec node npm install {ライブラリ名}
 ```
 
 # 備考 #
@@ -92,7 +93,7 @@ $ docker-compose exec node npm install {ライブラリ名}
 IDEなどの兼ね合いで、npmコマンドでインストールしたライブラリをローカルにコピーしたい場合は下記のようにする。
 
 ```bash
-$ docker cp $(docker-compose ps -q node):/usr/src/app/node_modules ./app/
+$ docker cp $(docker compose ps -q node):/usr/src/app/node_modules ./app/
 ```
 
 以上  
